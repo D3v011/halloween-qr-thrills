@@ -13,6 +13,10 @@ export default {
       },
     },
     extend: {
+      fontFamily: {
+        'inter': ['Inter', 'sans-serif'],
+        'creepster': ['Creepster', 'cursive'],
+      },
       colors: {
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
@@ -56,6 +60,13 @@ export default {
           "accent-foreground": "hsl(var(--sidebar-accent-foreground))",
           border: "hsl(var(--sidebar-border))",
           ring: "hsl(var(--sidebar-ring))",
+        },
+        halloween: {
+          orange: "hsl(var(--halloween-orange))",
+          purple: "hsl(var(--halloween-purple))",
+          red: "hsl(var(--halloween-red))",
+          dark: "hsl(var(--halloween-dark))",
+          darker: "hsl(var(--halloween-darker))",
         },
       },
       borderRadius: {

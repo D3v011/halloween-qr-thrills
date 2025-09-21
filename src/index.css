@@ -1,42 +1,65 @@
+@import url('https://fonts.googleapis.com/css2?family=Creepster&family=Inter:wght@300;400;500;600;700&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
-All colors MUST be HSL.
-*/
+/* Halloween-themed Design System */
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
+    /* Halloween Dark Theme */
+    --background: 240 10% 3.9%;
+    --foreground: 30 20% 95%;
 
-    --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
+    --card: 240 10% 5.5%;
+    --card-foreground: 30 20% 95%;
 
-    --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
+    --popover: 240 10% 5.5%;
+    --popover-foreground: 30 20% 95%;
 
-    --primary: 222.2 47.4% 11.2%;
-    --primary-foreground: 210 40% 98%;
+    --primary: 24 100% 50%;
+    --primary-foreground: 240 10% 3.9%;
 
-    --secondary: 210 40% 96.1%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
+    --secondary: 280 100% 30%;
+    --secondary-foreground: 30 20% 95%;
 
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
+    --muted: 240 5% 15%;
+    --muted-foreground: 240 5% 64.9%;
 
-    --accent: 210 40% 96.1%;
-    --accent-foreground: 222.2 47.4% 11.2%;
+    --accent: 0 100% 45%;
+    --accent-foreground: 30 20% 95%;
 
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 210 40% 98%;
 
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 222.2 84% 4.9%;
+    --border: 240 5% 15%;
+    --input: 240 5% 15%;
+    --ring: 24 100% 50%;
 
-    --radius: 0.5rem;
+    --radius: 1rem;
+
+    /* Halloween-specific colors */
+    --halloween-orange: 24 100% 50%;
+    --halloween-purple: 280 100% 30%;
+    --halloween-red: 0 100% 45%;
+    --halloween-dark: 240 10% 3.9%;
+    --halloween-darker: 240 20% 1%;
+
+    /* Gradients */
+    --gradient-halloween: linear-gradient(135deg, hsl(var(--halloween-purple)), hsl(var(--halloween-dark)));
+    --gradient-spooky: linear-gradient(45deg, hsl(var(--halloween-red)), hsl(var(--halloween-orange)));
+    --gradient-dark: linear-gradient(180deg, hsl(var(--halloween-darker)), hsl(var(--halloween-dark)));
+
+    /* Shadows and glows */
+    --shadow-spooky: 0 10px 30px -10px hsl(var(--halloween-orange) / 0.3);
+    --shadow-dark: 0 25px 50px -12px hsl(240 20% 0% / 0.8);
+    --glow-orange: 0 0 20px hsl(var(--halloween-orange) / 0.5);
+    --glow-purple: 0 0 20px hsl(var(--halloween-purple) / 0.5);
+
+    /* Animation timing */
+    --transition-spooky: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-smooth: all 0.3s ease;
 
     --sidebar-background: 0 0% 98%;
 
@@ -100,6 +123,141 @@ All colors MUST be HSL.
   }
 
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background text-foreground font-inter;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Creepster', cursive;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+  }
+}
+
+@layer components {
+  /* Halloween Button Variants */
+  .btn-spooky {
+    @apply bg-gradient-to-r from-orange-500 to-red-500 text-white font-semibold py-3 px-6 rounded-xl 
+           shadow-[var(--shadow-spooky)] hover:shadow-[var(--glow-orange)] 
+           transform hover:scale-105 transition-all duration-300 
+           border border-orange-400/20;
+  }
+
+  .btn-ghost {
+    @apply bg-white/10 backdrop-blur-sm text-white font-semibold py-3 px-6 rounded-xl 
+           border border-white/20 hover:bg-white/20 hover:shadow-[var(--glow-purple)]
+           transform hover:scale-105 transition-all duration-300;
+  }
+
+  .btn-mystery {
+    @apply bg-gradient-to-r from-purple-600 to-purple-800 text-white font-semibold py-3 px-6 rounded-xl 
+           shadow-[var(--shadow-dark)] hover:shadow-[var(--glow-purple)] 
+           transform hover:scale-105 transition-all duration-300 
+           border border-purple-400/20;
+  }
+
+  /* Halloween Card Styles */
+  .card-spooky {
+    @apply bg-gradient-to-br from-gray-900/90 to-black/90 backdrop-blur-sm 
+           border border-orange-500/20 rounded-2xl shadow-[var(--shadow-dark)]
+           hover:border-orange-500/40 transition-all duration-300;
+  }
+
+  .card-mystery {
+    @apply bg-gradient-to-br from-purple-900/30 to-black/90 backdrop-blur-sm 
+           border border-purple-500/20 rounded-2xl shadow-[var(--shadow-dark)]
+           hover:border-purple-500/40 transition-all duration-300;
+  }
+
+  /* Halloween Input Styles */
+  .input-spooky {
+    @apply bg-black/50 border border-orange-500/30 rounded-lg px-4 py-3 
+           text-white placeholder-gray-400 focus:border-orange-500 
+           focus:shadow-[var(--glow-orange)] transition-all duration-300;
+  }
+
+  /* Spooky Text Effects */
+  .text-spooky {
+    @apply bg-gradient-to-r from-orange-400 to-red-500 bg-clip-text text-transparent;
+  }
+
+  .text-mystery {
+    @apply bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent;
+  }
+
+  .text-ghost {
+    @apply text-white/80 hover:text-white transition-colors duration-300;
+  }
+}
+
+@layer utilities {
+  /* Halloween Animations */
+  .animate-float {
+    animation: float 3s ease-in-out infinite;
+  }
+
+  .animate-pulse-spooky {
+    animation: pulse-spooky 2s ease-in-out infinite;
+  }
+
+  .animate-glow {
+    animation: glow 2s ease-in-out infinite alternate;
+  }
+
+  .animate-shake {
+    animation: shake 0.5s ease-in-out;
+  }
+
+  /* Background gradients */
+  .bg-halloween {
+    background: var(--gradient-halloween);
+  }
+
+  .bg-spooky {
+    background: var(--gradient-spooky);
+  }
+
+  .bg-dark {
+    background: var(--gradient-dark);
+  }
+}
+
+/* Halloween Keyframes */
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+@keyframes pulse-spooky {
+  0%, 100% {
+    opacity: 0.8;
+    filter: drop-shadow(0 0 10px hsl(var(--halloween-orange) / 0.3));
+  }
+  50% {
+    opacity: 1;
+    filter: drop-shadow(0 0 20px hsl(var(--halloween-orange) / 0.6));
+  }
+}
+
+@keyframes glow {
+  from {
+    filter: drop-shadow(0 0 10px hsl(var(--halloween-purple) / 0.3));
+  }
+  to {
+    filter: drop-shadow(0 0 20px hsl(var(--halloween-purple) / 0.6));
+  }
+}
+
+@keyframes shake {
+  0%, 100% {
+    transform: translateX(0);
+  }
+  25% {
+    transform: translateX(-2px);
+  }
+  75% {
+    transform: translateX(2px);
   }
 }
