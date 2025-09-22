@@ -32,11 +32,11 @@ export interface SiteConfig {
 
 const defaultConfig: SiteConfig = {
   video: {
-    url: "https://www.w3schools.com/html/mov_bbb.mp4",
+    url: "./videos/apresenta.mp4",
     hasSound: true,
   },
   music: {
-    url: "https://www.soundjay.com/misc/sounds/bell-ringing-05.wav",
+    url: "./videos/msc.mp3",
     enabled: true,
   },
   riddle: {
