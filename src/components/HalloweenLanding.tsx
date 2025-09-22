@@ -24,10 +24,10 @@ const HalloweenLanding: React.FC = () => {
         <section className="min-h-screen flex items-center justify-center px-4">
           <div className="text-center max-w-4xl mx-auto">
             <h1 className="text-6xl md:text-8xl font-creepster text-spooky mb-6 animate-float">
-              🎃 Halloween Night
+              Halloween Night 2025 - O Convite Proibido
             </h1>
             <p className="text-xl md:text-2xl text-ghost mb-8 leading-relaxed">
-              A festa mais assombrada da cidade te espera...
+              Você recebeu o acesso proibido... A maior e mais sombria festa de Halloween de Barueri está chegando.
               <br />
               <span className="text-mystery">Você tem coragem?</span>
             </p>
