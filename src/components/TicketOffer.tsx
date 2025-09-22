@@ -70,7 +70,7 @@ const TicketOffer: React.FC = () => {
         <div className="bg-gradient-to-br from-red-500/20 to-pink-500/20 rounded-xl p-6 border border-red-500/30 hover:border-red-400/50 transition-colors duration-300">
           <Users className="w-8 h-8 text-red-400 mx-auto mb-3" />
           <p className="text-gray-300 text-sm mb-1">Vagas Limitadas</p>
-          <p className="text-red-300 font-bold text-lg">Apenas 100</p>
+          <p className="text-red-300 font-bold text-lg">Apenas 60</p>
           <p className="text-red-400 font-semibold">ingressos</p>
         </div>
       </div>
@@ -94,27 +94,27 @@ const TicketOffer: React.FC = () => {
         className="w-full sm:w-auto px-12 py-6 bg-gradient-to-r from-orange-600 to-red-600 hover:from-orange-500 hover:to-red-500 text-white font-bold text-xl rounded-2xl transition-all duration-300 hover:scale-105 shadow-2xl animate-pulse-spooky flex items-center justify-center gap-3 mx-auto mb-6"
       >
         <ExternalLink className="w-6 h-6" />
-        🎫 Garantir Meu Ingresso
+        🎃 Quero Entrar na Noite Assombrada
       </button>
 
       <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-6 text-sm">
         <div className="flex items-center justify-center gap-2 text-green-400">
-          <span className="text-lg">✅</span>
-          <span>Pagamento Seguro</span>
+          <span className="text-lg">👻</span>
+          <span>Noite Inesquecível</span>
         </div>
         <div className="flex items-center justify-center gap-2 text-green-400">
-          <span className="text-lg">✅</span>
-          <span>Confirmação Imediata</span>
+          <span className="text-lg">🍹</span>
+          <span>Open Bar Incluso</span>
         </div>
         <div className="flex items-center justify-center gap-2 text-green-400">
-          <span className="text-lg">✅</span>
-          <span>Suporte 24h</span>
+          <span className="text-lg">🔥</span>
+          <span>Gincanas Malditas</span>
         </div>
       </div>
 
       <div className="bg-red-900/30 rounded-xl p-4 border border-red-500/40">
         <p className="text-red-300 text-lg font-semibold animate-pulse-spooky">
-          ⚠️ ÚLTIMA CHANCE - Oferta válida por apenas 24 horas! ⚠️
+          ⚠️ Restam poucos ingressos! A maldição expira à meia-noite... ⚠️
         </p>
       </div>
     </div>
