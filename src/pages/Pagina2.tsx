@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { ArrowDown } from 'lucide-react';
 import BackgroundMusic from '@/components/BackgroundMusic';
+import { ConfigProvider } from '@/contexts/ConfigContext';
 
 const pageConfig = {
   "page": "/pagina2",
@@ -92,7 +93,8 @@ const Pagina2: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen bg-black text-white relative overflow-x-hidden">
+    <ConfigProvider>
+      <div className="min-h-screen bg-black text-white relative overflow-x-hidden">
       {/* SEO Meta Tags */}
       <title>{pageConfig.title}</title>
       <meta name="description" content={pageConfig.description} />
@@ -263,7 +265,8 @@ const Pagina2: React.FC = () => {
         <div className="absolute top-1/2 left-1/6 text-5xl animate-float opacity-20" style={{ animationDelay: '2s' }}>⚰️</div>
         <div className="absolute top-1/3 right-1/6 text-4xl animate-float opacity-20" style={{ animationDelay: '0.5s' }}>🔮</div>
       </div>
-    </div>
+      </div>
+    </ConfigProvider>
   );
 };
 
