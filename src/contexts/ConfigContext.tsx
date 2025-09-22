@@ -40,14 +40,14 @@ const defaultConfig: SiteConfig = {
     enabled: true,
   },
   riddle: {
-    question: "Eu sou negro como a noite, mas brilho na escuridão. Danço no vento e assusto o coração. O que sou eu?",
-    hint: "Sou feito de tecido e tenho uma forma assombrada...",
+    question: "Posso atravessar paredes, mas não posso ser tocado. Quem sou?",
+    hint: "Invisível, mas assustador.",
     answer: "fantasma",
   },
   offer: {
-    title: "🎃 Ingresso VIP Halloween Night",
+    title: "🎃 Ingresso Halloween Night",
     description: "Ingresso para a festa de Halloween mais assombrada da cidade! Inclui entrada, drink de boas-vindas e acesso à área VIP.",
-    price: "R$ 89,90",
+    price: "R$ 34,99",
     paymentLink: "https://pay.example.com/halloween-ticket",
   },
   social: {
