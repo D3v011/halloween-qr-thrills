@@ -54,14 +54,14 @@ const HalloweenLanding: React.FC = () => {
                 </div>
                 <div className="bg-red-500/20 rounded-xl p-4 border border-red-500/40">
                   <div className="text-3xl mb-2">📍</div>
-                  <div className="text-red-300 font-semibold">Local Secreto</div>
+                  <div className="text-red-300 font-semibold">Local</div>
                   <div className="text-white">Barueri/SP</div>
                 </div>
               </div>
               
               <div className="animate-pulse-spooky">
                 <p className="text-lg md:text-xl text-orange-400 mb-4 font-medium">
-                  ⬇️ Role para baixo e descubra como garantir seu ingresso ⬇️
+                  ⬇️ Você recebeu o acesso proibido ⬇️
                 </p>
               </div>
             </div>
