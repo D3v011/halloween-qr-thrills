@@ -67,19 +67,19 @@ const defaultConfig: SiteConfig = {
   hero: {
     title: "Halloween Night 2025",
     subtitle: "O Convite Proibido",
-    eventDate: "31 de Outubro",
-    eventTime: "22:00h",
+    eventDate: "01 de Novembro",
+    eventTime: "19h ás 01h",
     eventLocation: "Barueri/SP",
   },
   countdown: {
     enabled: true,
-    targetDate: "2025-10-31T22:00:00",
+    targetDate: "2025-11-01T19:00:00",
   },
   tickets: {
     vip: {
-      title: "🎃 Ingresso VIP",
+      title: "🎃 Ingresso Macabra",
       description: "Experiência completa com Open Bar e área VIP exclusiva",
-      price: "R$ 89,90",
+      price: "R$ 32,99",
       features: [
         "Open Bar Premium",
         "Área VIP Exclusiva",
@@ -88,16 +88,16 @@ const defaultConfig: SiteConfig = {
         "Acesso a Todas as Atrações"
       ],
       available: true,
-      purchaseLink: "https://pay.example.com/vip-ticket",
+      purchaseLink: "https://www.sympla.com.br/evento/halloween-night-2025---o-convite-proibido/3133849",
     },
     normal: {
       title: "🎟️ Ingresso Normal",
       description: "Acesso completo à festa mais assombrada",
-      price: "R$ 34,99",
+      price: "R$ 19,90",
       features: [
         "Entrada para o Evento",
         "Acesso a Todas as Atrações",
-        "Drink de Boas-vindas"
+        "Entrada até 21h"
       ],
       available: false,
       purchaseLink: "",
@@ -110,9 +110,9 @@ const defaultConfig: SiteConfig = {
     answer: "fantasma",
   },
   social: {
-    instagram: "https://instagram.com/halloween_party",
-    tiktok: "https://tiktok.com/@halloween_party",
-    whatsapp: "https://wa.me/5511999999999?text=Ol%C3%A1%21%20Quero%20saber%20mais%20sobre%20a%20Halloween%20Night%202025",
+    instagram: "https://www.instagram.com/halloweendaribeiro",
+    tiktok: "https://tiktok.com/",
+    whatsapp: "https://chat.whatsapp.com/HKsys1UVeTaKNAp3iZbshl",
   },
   theme: {
     primaryColor: "#ff6b35",
