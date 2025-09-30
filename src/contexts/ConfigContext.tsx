@@ -9,20 +9,45 @@ export interface SiteConfig {
     url: string;
     enabled: boolean;
   };
+  hero: {
+    title: string;
+    subtitle: string;
+    eventDate: string;
+    eventTime: string;
+    eventLocation: string;
+  };
+  countdown: {
+    enabled: boolean;
+    targetDate: string;
+  };
+  tickets: {
+    vip: {
+      title: string;
+      description: string;
+      price: string;
+      features: string[];
+      available: boolean;
+      purchaseLink: string;
+    };
+    normal: {
+      title: string;
+      description: string;
+      price: string;
+      features: string[];
+      available: boolean;
+      purchaseLink: string;
+    };
+  };
   riddle: {
+    enabled: boolean;
     question: string;
     hint: string;
     answer: string;
   };
-  offer: {
-    title: string;
-    description: string;
-    price: string;
-    paymentLink: string;
-  };
   social: {
     instagram: string;
     tiktok: string;
+    whatsapp: string;
   };
   theme: {
     primaryColor: string;
@@ -39,20 +64,55 @@ const defaultConfig: SiteConfig = {
     url: "./videos/msc.mp3",
     enabled: true,
   },
+  hero: {
+    title: "Halloween Night 2025",
+    subtitle: "O Convite Proibido",
+    eventDate: "31 de Outubro",
+    eventTime: "22:00h",
+    eventLocation: "Barueri/SP",
+  },
+  countdown: {
+    enabled: true,
+    targetDate: "2025-10-31T22:00:00",
+  },
+  tickets: {
+    vip: {
+      title: "🎃 Ingresso VIP",
+      description: "Experiência completa com Open Bar e área VIP exclusiva",
+      price: "R$ 89,90",
+      features: [
+        "Open Bar Premium",
+        "Área VIP Exclusiva",
+        "Entrada Prioritária",
+        "Drink de Boas-vindas",
+        "Acesso a Todas as Atrações"
+      ],
+      available: true,
+      purchaseLink: "https://pay.example.com/vip-ticket",
+    },
+    normal: {
+      title: "🎟️ Ingresso Normal",
+      description: "Acesso completo à festa mais assombrada",
+      price: "R$ 34,99",
+      features: [
+        "Entrada para o Evento",
+        "Acesso a Todas as Atrações",
+        "Drink de Boas-vindas"
+      ],
+      available: false,
+      purchaseLink: "",
+    },
+  },
   riddle: {
+    enabled: false,
     question: "Posso atravessar paredes, mas não posso ser tocado. Quem sou?",
     hint: "Invisível, mas assustador.",
     answer: "fantasma",
   },
-  offer: {
-    title: "🎃 Ingresso Halloween Night",
-    description: "Ingresso para a festa de Halloween mais assombrada da cidade! Inclui entrada, drink de boas-vindas e acesso à área VIP.",
-    price: "R$ 34,99",
-    paymentLink: "https://pay.example.com/halloween-ticket",
-  },
   social: {
     instagram: "https://instagram.com/halloween_party",
     tiktok: "https://tiktok.com/@halloween_party",
+    whatsapp: "https://wa.me/5511999999999?text=Ol%C3%A1%21%20Quero%20saber%20mais%20sobre%20a%20Halloween%20Night%202025",
   },
   theme: {
     primaryColor: "#ff6b35",
@@ -65,6 +125,8 @@ interface ConfigContextType {
   updateConfig: (newConfig: Partial<SiteConfig>) => void;
   riddleSolved: boolean;
   solveRiddle: () => void;
+  restoreDefault: () => void;
+  hasBackup: boolean;
 }
 
 const ConfigContext = createContext<ConfigContextType | undefined>(undefined);
@@ -72,10 +134,13 @@ const ConfigContext = createContext<ConfigContextType | undefined>(undefined);
 export const ConfigProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [config, setConfig] = useState<SiteConfig>(defaultConfig);
   const [riddleSolved, setRiddleSolved] = useState(false);
+  const [hasBackup, setHasBackup] = useState(false);
 
   // Load config from localStorage on mount
   useEffect(() => {
     const savedConfig = localStorage.getItem('halloween-site-config');
+    const backupExists = localStorage.getItem('halloween-site-config-backup');
+    
     if (savedConfig) {
       try {
         const parsedConfig = JSON.parse(savedConfig);
@@ -83,6 +148,15 @@ export const ConfigProvider: React.FC<{ children: React.ReactNode }> = ({ childr
       } catch (error) {
         console.error('Error loading config:', error);
       }
+    }
+    
+    // Check if backup exists
+    if (backupExists) {
+      setHasBackup(true);
+    } else {
+      // Create initial backup
+      localStorage.setItem('halloween-site-config-backup', JSON.stringify(defaultConfig));
+      setHasBackup(true);
     }
   }, []);
 
@@ -92,12 +166,25 @@ export const ConfigProvider: React.FC<{ children: React.ReactNode }> = ({ childr
     localStorage.setItem('halloween-site-config', JSON.stringify(updatedConfig));
   };
 
+  const restoreDefault = () => {
+    const backup = localStorage.getItem('halloween-site-config-backup');
+    if (backup) {
+      try {
+        const backupConfig = JSON.parse(backup);
+        setConfig(backupConfig);
+        localStorage.setItem('halloween-site-config', backup);
+      } catch (error) {
+        console.error('Error restoring backup:', error);
+      }
+    }
+  };
+
   const solveRiddle = () => {
     setRiddleSolved(true);
   };
 
   return (
-    <ConfigContext.Provider value={{ config, updateConfig, riddleSolved, solveRiddle }}>
+    <ConfigContext.Provider value={{ config, updateConfig, riddleSolved, solveRiddle, restoreDefault, hasBackup }}>
       {children}
     </ConfigContext.Provider>
   );

@@ -2,8 +2,10 @@ import React from 'react';
 import VideoBackground from './VideoBackground';
 import HalloweenBackground from './HalloweenBackground';
 import BackgroundMusic from './BackgroundMusic';
+import CountdownTimer from './CountdownTimer';
+import TicketsSection from './TicketsSection';
 import RiddleSection from './RiddleSection';
-import TicketOffer from './TicketOffer';
+import FloatingSocial from './FloatingSocial';
 import SocialFooter from './SocialFooter';
 import { useConfig } from '@/contexts/ConfigContext';
 
@@ -25,11 +27,11 @@ const HalloweenLanding: React.FC = () => {
           <div className="absolute inset-0 bg-gradient-to-b from-transparent via-black/20 to-black/60"></div>
           <div className="text-center max-w-5xl mx-auto relative z-10">
             <div className="mb-8 animate-float">
-              <h1 className="text-7xl md:text-9xl font-creepster text-spooky mb-6 leading-tight">
-                Halloween Night 2025
+              <h1 className="text-6xl md:text-9xl font-creepster text-spooky mb-6 leading-tight">
+                {config.hero.title}
               </h1>
               <div className="text-3xl md:text-4xl font-creepster text-mystery mb-4">
-                O Convite Proibido
+                {config.hero.subtitle}
               </div>
             </div>
             
@@ -45,23 +47,23 @@ const HalloweenLanding: React.FC = () => {
                 <div className="bg-orange-500/20 rounded-xl p-4 border border-orange-500/40">
                   <div className="text-3xl mb-2">🎃</div>
                   <div className="text-orange-300 font-semibold">Data Maldita</div>
-                  <div className="text-white">31 de Outubro</div>
+                  <div className="text-white">{config.hero.eventDate}</div>
                 </div>
                 <div className="bg-purple-500/20 rounded-xl p-4 border border-purple-500/40">
                   <div className="text-3xl mb-2">🕘</div>
                   <div className="text-purple-300 font-semibold">Hora Sombria</div>
-                  <div className="text-white">22:00h</div>
+                  <div className="text-white">{config.hero.eventTime}</div>
                 </div>
                 <div className="bg-red-500/20 rounded-xl p-4 border border-red-500/40">
                   <div className="text-3xl mb-2">📍</div>
                   <div className="text-red-300 font-semibold">Local</div>
-                  <div className="text-white">Barueri/SP</div>
+                  <div className="text-white">{config.hero.eventLocation}</div>
                 </div>
               </div>
               
               <div className="animate-pulse-spooky">
                 <p className="text-lg md:text-xl text-orange-400 mb-4 font-medium">
-                  ⬇️ Você recebeu o acesso proibido ⬇️
+                  ⬇️ Ingressos Limitados - Garanta o seu! ⬇️
                 </p>
               </div>
             </div>
@@ -77,11 +79,22 @@ const HalloweenLanding: React.FC = () => {
         {/* Content Section */}
         <section className="py-20 px-4 relative">
           <div className="absolute inset-0 bg-gradient-to-b from-black/60 to-transparent pointer-events-none"></div>
-          <div className="max-w-3xl mx-auto space-y-12 relative z-10">
-            <RiddleSection />
-            <TicketOffer />
+          <div className="max-w-6xl mx-auto space-y-16 relative z-10">
+            {/* Countdown */}
+            {config.countdown.enabled && (
+              <CountdownTimer targetDate={config.countdown.targetDate} />
+            )}
+            
+            {/* Tickets Section */}
+            <TicketsSection />
+            
+            {/* Riddle (Optional) */}
+            {config.riddle.enabled && <RiddleSection />}
           </div>
         </section>
+
+        {/* Floating Social Links */}
+        <FloatingSocial />
 
         {/* Footer */}
         <SocialFooter />

@@ -4,12 +4,16 @@ import {
   Video, 
   Music, 
   HelpCircle, 
-  DollarSign, 
+  Ticket,
   Instagram, 
   Palette,
   Save,
   Eye,
-  ArrowLeft
+  ArrowLeft,
+  Clock,
+  Type,
+  RotateCcw,
+  AlertCircle
 } from 'lucide-react';
 import { useConfig } from '@/contexts/ConfigContext';
 import { toast } from '@/hooks/use-toast';
@@ -19,8 +23,8 @@ interface AdminDashboardProps {
 }
 
 const AdminDashboard: React.FC<AdminDashboardProps> = ({ onClose }) => {
-  const { config, updateConfig } = useConfig();
-  const [activeTab, setActiveTab] = useState('video');
+  const { config, updateConfig, restoreDefault, hasBackup } = useConfig();
+  const [activeTab, setActiveTab] = useState('hero');
   const [formData, setFormData] = useState(config);
 
   const handleSave = () => {
@@ -29,6 +33,17 @@ const AdminDashboard: React.FC<AdminDashboardProps> = ({ onClose }) => {
       title: "✅ Configurações salvas!",
       description: "As alterações foram aplicadas com sucesso.",
     });
+  };
+
+  const handleRestore = () => {
+    if (confirm('Tem certeza que deseja restaurar a versão original? Todas as alterações serão perdidas.')) {
+      restoreDefault();
+      window.location.reload();
+      toast({
+        title: "🔄 Versão original restaurada!",
+        description: "A página foi restaurada para o estado original.",
+      });
+    }
   };
 
   const handleInputChange = (section: string, field: string, value: any) => {
@@ -41,11 +56,43 @@ const AdminDashboard: React.FC<AdminDashboardProps> = ({ onClose }) => {
     }));
   };
 
+  const handleNestedInputChange = (section: string, subsection: string, field: string, value: any) => {
+    setFormData(prev => ({
+      ...prev,
+      [section]: {
+        ...prev[section as keyof typeof prev],
+        [subsection]: {
+          ...(prev[section as keyof typeof prev] as any)[subsection],
+          [field]: value
+        }
+      }
+    }));
+  };
+
+  const handleArrayInputChange = (section: string, subsection: string, field: string, index: number, value: string) => {
+    setFormData(prev => {
+      const newFeatures = [...((prev[section as keyof typeof prev] as any)[subsection][field])];
+      newFeatures[index] = value;
+      return {
+        ...prev,
+        [section]: {
+          ...prev[section as keyof typeof prev],
+          [subsection]: {
+            ...(prev[section as keyof typeof prev] as any)[subsection],
+            [field]: newFeatures
+          }
+        }
+      };
+    });
+  };
+
   const tabs = [
+    { id: 'hero', label: 'Hero', icon: Type },
+    { id: 'countdown', label: 'Contagem', icon: Clock },
     { id: 'video', label: 'Vídeo', icon: Video },
     { id: 'music', label: 'Música', icon: Music },
+    { id: 'tickets', label: 'Ingressos', icon: Ticket },
     { id: 'riddle', label: 'Enigma', icon: HelpCircle },
-    { id: 'offer', label: 'Oferta', icon: DollarSign },
     { id: 'social', label: 'Redes Sociais', icon: Instagram },
     { id: 'theme', label: 'Tema', icon: Palette },
   ];
@@ -56,7 +103,7 @@ const AdminDashboard: React.FC<AdminDashboardProps> = ({ onClose }) => {
         <div className="max-w-6xl mx-auto">
           {/* Header */}
           <div className="card-spooky p-6 mb-6">
-            <div className="flex items-center justify-between">
+            <div className="flex items-center justify-between flex-wrap gap-4">
               <div className="flex items-center gap-4">
                 <button
                   onClick={onClose}
@@ -72,7 +119,16 @@ const AdminDashboard: React.FC<AdminDashboardProps> = ({ onClose }) => {
                 </div>
               </div>
               
-              <div className="flex gap-3">
+              <div className="flex gap-3 flex-wrap">
+                {hasBackup && (
+                  <button
+                    onClick={handleRestore}
+                    className="btn-ghost flex items-center gap-2 bg-red-500/20 hover:bg-red-500/30 border-red-500/30"
+                  >
+                    <RotateCcw size={16} />
+                    Restaurar Original
+                  </button>
+                )}
                 <button
                   onClick={() => window.open('/', '_blank')}
                   className="btn-ghost flex items-center gap-2"
@@ -89,6 +145,15 @@ const AdminDashboard: React.FC<AdminDashboardProps> = ({ onClose }) => {
                 </button>
               </div>
             </div>
+
+            {hasBackup && (
+              <div className="mt-4 bg-blue-500/10 border border-blue-500/30 rounded-lg p-3 flex items-start gap-3">
+                <AlertCircle className="text-blue-400 flex-shrink-0 mt-0.5" size={18} />
+                <p className="text-sm text-blue-300">
+                  <strong>Backup Disponível:</strong> A versão original está salva. Você pode restaurá-la a qualquer momento clicando em "Restaurar Original".
+                </p>
+              </div>
+            )}
           </div>
 
           <div className="grid grid-cols-1 lg:grid-cols-4 gap-6">
@@ -120,6 +185,121 @@ const AdminDashboard: React.FC<AdminDashboardProps> = ({ onClose }) => {
             {/* Content */}
             <div className="lg:col-span-3">
               <div className="card-spooky p-6">
+                {/* Hero Settings */}
+                {activeTab === 'hero' && (
+                  <div className="space-y-6">
+                    <h2 className="text-2xl font-creepster text-spooky mb-4">
+                      🎭 Configurações do Hero
+                    </h2>
+                    
+                    <div>
+                      <label className="block text-sm font-medium text-gray-300 mb-2">
+                        Título Principal
+                      </label>
+                      <input
+                        type="text"
+                        value={formData.hero.title}
+                        onChange={(e) => handleInputChange('hero', 'title', e.target.value)}
+                        className="input-spooky w-full"
+                        placeholder="Halloween Night 2025"
+                      />
+                    </div>
+
+                    <div>
+                      <label className="block text-sm font-medium text-gray-300 mb-2">
+                        Subtítulo
+                      </label>
+                      <input
+                        type="text"
+                        value={formData.hero.subtitle}
+                        onChange={(e) => handleInputChange('hero', 'subtitle', e.target.value)}
+                        className="input-spooky w-full"
+                        placeholder="O Convite Proibido"
+                      />
+                    </div>
+
+                    <div className="grid md:grid-cols-3 gap-4">
+                      <div>
+                        <label className="block text-sm font-medium text-gray-300 mb-2">
+                          Data do Evento
+                        </label>
+                        <input
+                          type="text"
+                          value={formData.hero.eventDate}
+                          onChange={(e) => handleInputChange('hero', 'eventDate', e.target.value)}
+                          className="input-spooky w-full"
+                          placeholder="31 de Outubro"
+                        />
+                      </div>
+
+                      <div>
+                        <label className="block text-sm font-medium text-gray-300 mb-2">
+                          Horário
+                        </label>
+                        <input
+                          type="text"
+                          value={formData.hero.eventTime}
+                          onChange={(e) => handleInputChange('hero', 'eventTime', e.target.value)}
+                          className="input-spooky w-full"
+                          placeholder="22:00h"
+                        />
+                      </div>
+
+                      <div>
+                        <label className="block text-sm font-medium text-gray-300 mb-2">
+                          Local
+                        </label>
+                        <input
+                          type="text"
+                          value={formData.hero.eventLocation}
+                          onChange={(e) => handleInputChange('hero', 'eventLocation', e.target.value)}
+                          className="input-spooky w-full"
+                          placeholder="Barueri/SP"
+                        />
+                      </div>
+                    </div>
+                  </div>
+                )}
+
+                {/* Countdown Settings */}
+                {activeTab === 'countdown' && (
+                  <div className="space-y-6">
+                    <h2 className="text-2xl font-creepster text-spooky mb-4">
+                      ⏰ Contagem Regressiva
+                    </h2>
+                    
+                    <div className="flex items-center gap-3 mb-4">
+                      <input
+                        type="checkbox"
+                        id="countdownEnabled"
+                        checked={formData.countdown.enabled}
+                        onChange={(e) => handleInputChange('countdown', 'enabled', e.target.checked)}
+                        className="w-4 h-4 rounded border-gray-600 bg-gray-800 text-orange-500"
+                      />
+                      <label htmlFor="countdownEnabled" className="text-gray-300">
+                        Ativar contagem regressiva
+                      </label>
+                    </div>
+
+                    {formData.countdown.enabled && (
+                      <div>
+                        <label className="block text-sm font-medium text-gray-300 mb-2">
+                          Data e Hora Alvo
+                        </label>
+                        <input
+                          type="datetime-local"
+                          value={formData.countdown.targetDate}
+                          onChange={(e) => handleInputChange('countdown', 'targetDate', e.target.value)}
+                          className="input-spooky w-full"
+                        />
+                        <p className="text-xs text-gray-400 mt-1">
+                          Formato: YYYY-MM-DDTHH:mm:ss
+                        </p>
+                      </div>
+                    )}
+                  </div>
+                )}
+
                 {/* Video Settings */}
                 {activeTab === 'video' && (
                   <div className="space-y-6">
@@ -136,7 +316,7 @@ const AdminDashboard: React.FC<AdminDashboardProps> = ({ onClose }) => {
                         value={formData.video.url}
                         onChange={(e) => handleInputChange('video', 'url', e.target.value)}
                         className="input-spooky w-full"
-                        placeholder="https://..."
+                        placeholder="./videos/apresenta.mp4"
                       />
                       <p className="text-xs text-gray-400 mt-1">
                         Cole a URL de um vídeo (MP4, WebM, etc.)
@@ -188,13 +368,186 @@ const AdminDashboard: React.FC<AdminDashboardProps> = ({ onClose }) => {
                           value={formData.music.url}
                           onChange={(e) => handleInputChange('music', 'url', e.target.value)}
                           className="input-spooky w-full"
-                          placeholder="https://..."
+                          placeholder="./videos/msc.mp3"
                         />
                         <p className="text-xs text-gray-400 mt-1">
                           Cole a URL de um arquivo de áudio (MP3, WAV, etc.)
                         </p>
                       </div>
                     )}
+                  </div>
+                )}
+
+                {/* Tickets Settings */}
+                {activeTab === 'tickets' && (
+                  <div className="space-y-8">
+                    <h2 className="text-2xl font-creepster text-spooky mb-4">
+                      🎫 Configurações de Ingressos
+                    </h2>
+                    
+                    {/* VIP Ticket */}
+                    <div className="border border-orange-500/30 rounded-xl p-6 bg-orange-500/5">
+                      <h3 className="text-xl font-creepster text-orange-400 mb-4">Ingresso VIP</h3>
+                      
+                      <div className="space-y-4">
+                        <div>
+                          <label className="block text-sm font-medium text-gray-300 mb-2">
+                            Título
+                          </label>
+                          <input
+                            type="text"
+                            value={formData.tickets.vip.title}
+                            onChange={(e) => handleNestedInputChange('tickets', 'vip', 'title', e.target.value)}
+                            className="input-spooky w-full"
+                          />
+                        </div>
+
+                        <div>
+                          <label className="block text-sm font-medium text-gray-300 mb-2">
+                            Descrição
+                          </label>
+                          <textarea
+                            value={formData.tickets.vip.description}
+                            onChange={(e) => handleNestedInputChange('tickets', 'vip', 'description', e.target.value)}
+                            className="input-spooky w-full h-20"
+                          />
+                        </div>
+
+                        <div>
+                          <label className="block text-sm font-medium text-gray-300 mb-2">
+                            Preço
+                          </label>
+                          <input
+                            type="text"
+                            value={formData.tickets.vip.price}
+                            onChange={(e) => handleNestedInputChange('tickets', 'vip', 'price', e.target.value)}
+                            className="input-spooky w-full"
+                          />
+                        </div>
+
+                        <div>
+                          <label className="block text-sm font-medium text-gray-300 mb-2">
+                            Benefícios
+                          </label>
+                          {formData.tickets.vip.features.map((feature, index) => (
+                            <input
+                              key={index}
+                              type="text"
+                              value={feature}
+                              onChange={(e) => handleArrayInputChange('tickets', 'vip', 'features', index, e.target.value)}
+                              className="input-spooky w-full mb-2"
+                            />
+                          ))}
+                        </div>
+
+                        <div>
+                          <label className="block text-sm font-medium text-gray-300 mb-2">
+                            Link de Compra
+                          </label>
+                          <input
+                            type="url"
+                            value={formData.tickets.vip.purchaseLink}
+                            onChange={(e) => handleNestedInputChange('tickets', 'vip', 'purchaseLink', e.target.value)}
+                            className="input-spooky w-full"
+                          />
+                        </div>
+
+                        <div className="flex items-center gap-3">
+                          <input
+                            type="checkbox"
+                            id="vipAvailable"
+                            checked={formData.tickets.vip.available}
+                            onChange={(e) => handleNestedInputChange('tickets', 'vip', 'available', e.target.checked)}
+                            className="w-4 h-4 rounded border-gray-600 bg-gray-800 text-orange-500"
+                          />
+                          <label htmlFor="vipAvailable" className="text-gray-300">
+                            Ingressos disponíveis
+                          </label>
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* Normal Ticket */}
+                    <div className="border border-purple-500/30 rounded-xl p-6 bg-purple-500/5">
+                      <h3 className="text-xl font-creepster text-purple-400 mb-4">Ingresso Normal</h3>
+                      
+                      <div className="space-y-4">
+                        <div>
+                          <label className="block text-sm font-medium text-gray-300 mb-2">
+                            Título
+                          </label>
+                          <input
+                            type="text"
+                            value={formData.tickets.normal.title}
+                            onChange={(e) => handleNestedInputChange('tickets', 'normal', 'title', e.target.value)}
+                            className="input-spooky w-full"
+                          />
+                        </div>
+
+                        <div>
+                          <label className="block text-sm font-medium text-gray-300 mb-2">
+                            Descrição
+                          </label>
+                          <textarea
+                            value={formData.tickets.normal.description}
+                            onChange={(e) => handleNestedInputChange('tickets', 'normal', 'description', e.target.value)}
+                            className="input-spooky w-full h-20"
+                          />
+                        </div>
+
+                        <div>
+                          <label className="block text-sm font-medium text-gray-300 mb-2">
+                            Preço
+                          </label>
+                          <input
+                            type="text"
+                            value={formData.tickets.normal.price}
+                            onChange={(e) => handleNestedInputChange('tickets', 'normal', 'price', e.target.value)}
+                            className="input-spooky w-full"
+                          />
+                        </div>
+
+                        <div>
+                          <label className="block text-sm font-medium text-gray-300 mb-2">
+                            Benefícios
+                          </label>
+                          {formData.tickets.normal.features.map((feature, index) => (
+                            <input
+                              key={index}
+                              type="text"
+                              value={feature}
+                              onChange={(e) => handleArrayInputChange('tickets', 'normal', 'features', index, e.target.value)}
+                              className="input-spooky w-full mb-2"
+                            />
+                          ))}
+                        </div>
+
+                        <div>
+                          <label className="block text-sm font-medium text-gray-300 mb-2">
+                            Link de Compra
+                          </label>
+                          <input
+                            type="url"
+                            value={formData.tickets.normal.purchaseLink}
+                            onChange={(e) => handleNestedInputChange('tickets', 'normal', 'purchaseLink', e.target.value)}
+                            className="input-spooky w-full"
+                          />
+                        </div>
+
+                        <div className="flex items-center gap-3">
+                          <input
+                            type="checkbox"
+                            id="normalAvailable"
+                            checked={formData.tickets.normal.available}
+                            onChange={(e) => handleNestedInputChange('tickets', 'normal', 'available', e.target.checked)}
+                            className="w-4 h-4 rounded border-gray-600 bg-gray-800 text-orange-500"
+                          />
+                          <label htmlFor="normalAvailable" className="text-gray-300">
+                            Ingressos disponíveis
+                          </label>
+                        </div>
+                      </div>
+                    </div>
                   </div>
                 )}
 
@@ -205,106 +558,63 @@ const AdminDashboard: React.FC<AdminDashboardProps> = ({ onClose }) => {
                       🔮 Configurações do Enigma
                     </h2>
                     
-                    <div>
-                      <label className="block text-sm font-medium text-gray-300 mb-2">
-                        Pergunta do Enigma
-                      </label>
-                      <textarea
-                        value={formData.riddle.question}
-                        onChange={(e) => handleInputChange('riddle', 'question', e.target.value)}
-                        className="input-spooky w-full h-24"
-                        placeholder="Digite o enigma..."
-                      />
-                    </div>
-
-                    <div>
-                      <label className="block text-sm font-medium text-gray-300 mb-2">
-                        Dica (opcional)
-                      </label>
+                    <div className="flex items-center gap-3 mb-4">
                       <input
-                        type="text"
-                        value={formData.riddle.hint}
-                        onChange={(e) => handleInputChange('riddle', 'hint', e.target.value)}
-                        className="input-spooky w-full"
-                        placeholder="Digite uma dica..."
+                        type="checkbox"
+                        id="riddleEnabled"
+                        checked={formData.riddle.enabled}
+                        onChange={(e) => handleInputChange('riddle', 'enabled', e.target.checked)}
+                        className="w-4 h-4 rounded border-gray-600 bg-gray-800 text-orange-500"
                       />
+                      <label htmlFor="riddleEnabled" className="text-gray-300">
+                        Ativar seção de enigma
+                      </label>
                     </div>
 
-                    <div>
-                      <label className="block text-sm font-medium text-gray-300 mb-2">
-                        Resposta Correta
-                      </label>
-                      <input
-                        type="text"
-                        value={formData.riddle.answer}
-                        onChange={(e) => handleInputChange('riddle', 'answer', e.target.value)}
-                        className="input-spooky w-full"
-                        placeholder="Resposta..."
-                      />
-                      <p className="text-xs text-gray-400 mt-1">
-                        A comparação será feita ignorando maiúsculas/minúsculas
-                      </p>
-                    </div>
-                  </div>
-                )}
+                    {formData.riddle.enabled && (
+                      <>
+                        <div>
+                          <label className="block text-sm font-medium text-gray-300 mb-2">
+                            Pergunta do Enigma
+                          </label>
+                          <textarea
+                            value={formData.riddle.question}
+                            onChange={(e) => handleInputChange('riddle', 'question', e.target.value)}
+                            className="input-spooky w-full h-24"
+                            placeholder="Digite o enigma..."
+                          />
+                        </div>
 
-                {/* Offer Settings */}
-                {activeTab === 'offer' && (
-                  <div className="space-y-6">
-                    <h2 className="text-2xl font-creepster text-spooky mb-4">
-                      🎫 Configurações da Oferta
-                    </h2>
-                    
-                    <div>
-                      <label className="block text-sm font-medium text-gray-300 mb-2">
-                        Título da Oferta
-                      </label>
-                      <input
-                        type="text"
-                        value={formData.offer.title}
-                        onChange={(e) => handleInputChange('offer', 'title', e.target.value)}
-                        className="input-spooky w-full"
-                        placeholder="🎃 Ingresso VIP Halloween Night"
-                      />
-                    </div>
+                        <div>
+                          <label className="block text-sm font-medium text-gray-300 mb-2">
+                            Dica (opcional)
+                          </label>
+                          <input
+                            type="text"
+                            value={formData.riddle.hint}
+                            onChange={(e) => handleInputChange('riddle', 'hint', e.target.value)}
+                            className="input-spooky w-full"
+                            placeholder="Digite uma dica..."
+                          />
+                        </div>
 
-                    <div>
-                      <label className="block text-sm font-medium text-gray-300 mb-2">
-                        Descrição
-                      </label>
-                      <textarea
-                        value={formData.offer.description}
-                        onChange={(e) => handleInputChange('offer', 'description', e.target.value)}
-                        className="input-spooky w-full h-24"
-                        placeholder="Descrição da oferta..."
-                      />
-                    </div>
-
-                    <div>
-                      <label className="block text-sm font-medium text-gray-300 mb-2">
-                        Preço
-                      </label>
-                      <input
-                        type="text"
-                        value={formData.offer.price}
-                        onChange={(e) => handleInputChange('offer', 'price', e.target.value)}
-                        className="input-spooky w-full"
-                        placeholder="R$ 89,90"
-                      />
-                    </div>
-
-                    <div>
-                      <label className="block text-sm font-medium text-gray-300 mb-2">
-                        Link de Pagamento
-                      </label>
-                      <input
-                        type="url"
-                        value={formData.offer.paymentLink}
-                        onChange={(e) => handleInputChange('offer', 'paymentLink', e.target.value)}
-                        className="input-spooky w-full"
-                        placeholder="https://pay.example.com/..."
-                      />
-                    </div>
+                        <div>
+                          <label className="block text-sm font-medium text-gray-300 mb-2">
+                            Resposta Correta
+                          </label>
+                          <input
+                            type="text"
+                            value={formData.riddle.answer}
+                            onChange={(e) => handleInputChange('riddle', 'answer', e.target.value)}
+                            className="input-spooky w-full"
+                            placeholder="Resposta..."
+                          />
+                          <p className="text-xs text-gray-400 mt-1">
+                            A comparação será feita ignorando maiúsculas/minúsculas
+                          </p>
+                        </div>
+                      </>
+                    )}
                   </div>
                 )}
 
@@ -315,6 +625,22 @@ const AdminDashboard: React.FC<AdminDashboardProps> = ({ onClose }) => {
                       📱 Redes Sociais
                     </h2>
                     
+                    <div>
+                      <label className="block text-sm font-medium text-gray-300 mb-2">
+                        WhatsApp
+                      </label>
+                      <input
+                        type="url"
+                        value={formData.social.whatsapp}
+                        onChange={(e) => handleInputChange('social', 'whatsapp', e.target.value)}
+                        className="input-spooky w-full"
+                        placeholder="https://wa.me/5511999999999"
+                      />
+                      <p className="text-xs text-gray-400 mt-1">
+                        Formato: https://wa.me/[código do país][número]?text=[mensagem]
+                      </p>
+                    </div>
+
                     <div>
                       <label className="block text-sm font-medium text-gray-300 mb-2">
                         Instagram
