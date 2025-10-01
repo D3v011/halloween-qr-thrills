@@ -79,7 +79,7 @@ const defaultConfig: SiteConfig = {
     vip: {
       title: "🎃 Ingresso Macabra",
       description: "Experiência completa com Open Bar e área VIP exclusiva",
-      price: "R$ 32,99",
+      price: "R$ 29,99",
       features: [
         "Open Bar Premium",
         "Área VIP Exclusiva",
@@ -88,7 +88,7 @@ const defaultConfig: SiteConfig = {
         "Acesso a Todas as Atrações"
       ],
       available: true,
-      purchaseLink: "https://www.sympla.com.br/evento/halloween-night-2025---o-convite-proibido/3133849",
+      purchaseLink: "https://mpago.li/2dMEezd",
     },
     normal: {
       title: "🎟️ Ingresso Normal",
