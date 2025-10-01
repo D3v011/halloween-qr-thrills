@@ -115,7 +115,7 @@ const defaultConfig: SiteConfig = {
     whatsapp: "https://chat.whatsapp.com/HKsys1UVeTaKNAp3iZbshl",
   },
   theme: {
-    primaryColor: "#ff6b35",
+    primaryColor: "#ff3535ff",
     fontFamily: "Creepster",
   },
 };

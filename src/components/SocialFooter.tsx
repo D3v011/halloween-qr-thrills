@@ -6,11 +6,11 @@ const SocialFooter: React.FC = () => {
       <div className="container mx-auto px-4">
         <div className="text-center space-y-2 text-gray-400 text-sm">
           <p>🎃 Halloween Night 2025 - O Convite Proibido!</p>
-          <p>👻 Produzido com 💀 e muito mistério</p>
+          <p>🕷️ Entrada só para os corajosos  </p>
           <div className="flex justify-center items-center gap-4 mt-4">
-            <span>📱 Acesso via QR Code</span>
+            <span>🩸 Mistérios e surpresas a cada canto</span>
+            <span>🏚️ Local secreto revelado</span>
             <span>🔒 Site Seguro</span>
-            <span>⚡ Tempo Real</span>
           </div>
         </div>
       </div>
