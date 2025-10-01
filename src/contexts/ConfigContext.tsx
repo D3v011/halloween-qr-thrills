@@ -82,7 +82,7 @@ const defaultConfig: SiteConfig = {
     vip: {
       title: "🎃 Ingresso Macabra",
       description: "Experiência completa com Open Bar e área VIP exclusiva",
-      price: "R$ 2",
+      price: "R$ 34,99",
       features: [
         "Open Bar Premium",
         "Área VIP Exclusiva",
@@ -107,7 +107,7 @@ const defaultConfig: SiteConfig = {
     },
   },
   checkout: {
-    enabled: true,
+    enabled: false,
   },
   riddle: {
     enabled: false,

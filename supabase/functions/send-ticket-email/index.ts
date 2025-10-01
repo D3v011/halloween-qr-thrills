@@ -111,9 +111,9 @@ serve(async (req) => {
 
             <div style="text-align: center; margin-top: 30px;">
               <h2 style="color: #f97316;">🎃 Prepare-se para a noite mais sombria 🎃</h2>
-              <p><strong>📅 Data:</strong> 31 de Outubro de 2025</p>
-              <p><strong>📍 Local:</strong> Jardim Silveira, Barueri - SP</p>
-              <p><strong>🕒 Horário:</strong> 20:00h</p>
+              <p><strong>📅 Data:</strong> 01 de Novembro de 2025</p>
+              <p><strong>📍 Local:</strong> Revelado no Grupo</p>
+              <p><strong>🕒 Horário:</strong> 19h ás 01h</p>
             </div>
 
             <div class="footer">
