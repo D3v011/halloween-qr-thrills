@@ -10,14 +10,14 @@ const FloatingSocial: React.FC = () => {
       name: 'WhatsApp',
       url: config.social.whatsapp,
       icon: MessageCircle,
-      bgColor: 'bg-green-500 hover:bg-green-600',
-      label: 'Fale Conosco no WhatsApp',
+      bgColor: 'bg-red-700 hover:bg-black text-white border-2 border-black hover:border-red-700',
+      label: 'Grupo da Festa',
     },
     {
       name: 'Instagram',
       url: config.social.instagram,
       icon: Instagram,
-      bgColor: 'bg-gradient-to-br from-purple-500 via-pink-500 to-orange-500 hover:from-purple-600 hover:via-pink-600 hover:to-orange-600',
+      bgColor: 'bg-black hover:bg-red-700 text-white border-2 border-red-700 hover:border-black',
       label: 'Siga no Instagram',
     },
   ];
