@@ -57,11 +57,11 @@ export interface SiteConfig {
 
 const defaultConfig: SiteConfig = {
   video: {
-    url: "./videos/apresenta.mp4",
+    url: "./videos/apresenta2.mp4",
     hasSound: true,
   },
   music: {
-    url: "./videos/msc.mp3",
+    url: "./videos/msc2.mp3",
     enabled: true,
   },
   hero: {
