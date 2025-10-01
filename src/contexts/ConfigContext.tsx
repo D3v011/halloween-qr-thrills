@@ -110,7 +110,7 @@ const defaultConfig: SiteConfig = {
     answer: "fantasma",
   },
   social: {
-    instagram: "https://www.instagram.com/halloweendaribeiro",
+    instagram: "https://www.instagram.com/halloweenrb_",
     tiktok: "https://tiktok.com/",
     whatsapp: "https://chat.whatsapp.com/HKsys1UVeTaKNAp3iZbshl",
   },
