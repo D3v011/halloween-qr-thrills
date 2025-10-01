@@ -61,7 +61,7 @@ const defaultConfig: SiteConfig = {
     hasSound: true,
   },
   music: {
-    url: "./videos/msc2.mp3",
+    url: "./videos/msc3.mp3",
     enabled: true,
   },
   hero: {
