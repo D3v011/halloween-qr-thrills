@@ -548,6 +548,47 @@ const AdminDashboard: React.FC<AdminDashboardProps> = ({ onClose }) => {
                         </div>
                       </div>
                     </div>
+
+                    {/* Checkout Settings */}
+                    <div className="border border-blue-500/30 rounded-xl p-6 bg-blue-500/5">
+                      <h3 className="text-xl font-creepster text-blue-400 mb-4">
+                        💳 Sistema de Checkout (Mercado Pago)
+                      </h3>
+                      
+                      <div className="space-y-4">
+                        <div className="flex items-center gap-3">
+                          <input
+                            type="checkbox"
+                            id="checkoutEnabled"
+                            checked={formData.checkout.enabled}
+                            onChange={(e) => handleInputChange('checkout', 'enabled', e.target.checked)}
+                            className="w-4 h-4 rounded border-gray-600 bg-gray-800 text-blue-500"
+                          />
+                          <label htmlFor="checkoutEnabled" className="text-gray-300">
+                            Ativar checkout integrado com Mercado Pago
+                          </label>
+                        </div>
+
+                        {formData.checkout.enabled && (
+                          <div className="bg-blue-900/20 border border-blue-500/30 rounded-lg p-4 mt-4">
+                            <p className="text-sm text-blue-300">
+                              <strong>✅ Checkout Ativo:</strong> Os compradores verão um formulário antes de serem redirecionados ao Mercado Pago. Após a aprovação do pagamento, receberão automaticamente um e-mail com o QR Code do ingresso.
+                            </p>
+                            <p className="text-xs text-gray-400 mt-2">
+                              Certifique-se de que as credenciais do Mercado Pago e Resend estão configuradas.
+                            </p>
+                          </div>
+                        )}
+
+                        {!formData.checkout.enabled && (
+                          <div className="bg-gray-700/20 border border-gray-600/30 rounded-lg p-4 mt-4">
+                            <p className="text-sm text-gray-400">
+                              Quando desativado, os botões de compra usarão os links diretos configurados acima.
+                            </p>
+                          </div>
+                        )}
+                      </div>
+                    </div>
                   </div>
                 )}
 

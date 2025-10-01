@@ -38,6 +38,9 @@ export interface SiteConfig {
       purchaseLink: string;
     };
   };
+  checkout: {
+    enabled: boolean;
+  };
   riddle: {
     enabled: boolean;
     question: string;
@@ -102,6 +105,9 @@ const defaultConfig: SiteConfig = {
       available: false,
       purchaseLink: "",
     },
+  },
+  checkout: {
+    enabled: false,
   },
   riddle: {
     enabled: false,
