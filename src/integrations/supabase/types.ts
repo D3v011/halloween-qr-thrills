@@ -14,7 +14,48 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      purchases: {
+        Row: {
+          created_at: string
+          email: string
+          full_name: string
+          id: string
+          mercadopago_payment_id: string | null
+          mercadopago_preference_id: string | null
+          payment_status: string | null
+          price: number
+          qr_code_url: string | null
+          ticket_type: string
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          email: string
+          full_name: string
+          id?: string
+          mercadopago_payment_id?: string | null
+          mercadopago_preference_id?: string | null
+          payment_status?: string | null
+          price: number
+          qr_code_url?: string | null
+          ticket_type: string
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          email?: string
+          full_name?: string
+          id?: string
+          mercadopago_payment_id?: string | null
+          mercadopago_preference_id?: string | null
+          payment_status?: string | null
+          price?: number
+          qr_code_url?: string | null
+          ticket_type?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
