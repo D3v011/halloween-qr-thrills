@@ -9,6 +9,7 @@ import {
   Palette,
   Save,
   Eye,
+  CheckCircle2,
   ArrowLeft,
   Clock,
   Type,
@@ -135,6 +136,13 @@ const AdminDashboard: React.FC<AdminDashboardProps> = ({ onClose }) => {
                 >
                   <Eye size={16} />
                   Visualizar Site
+                </button>
+                <button
+                  onClick={() => window.open('/checkin', '_blank')}
+                  className="btn-ghost flex items-center gap-2 bg-green-500/20 hover:bg-green-500/30 border-green-500/30"
+                >
+                  <CheckCircle2 size={16} />
+                  Sistema Check-in
                 </button>
                 <button
                   onClick={handleSave}
@@ -566,6 +574,19 @@ const AdminDashboard: React.FC<AdminDashboardProps> = ({ onClose }) => {
                           />
                           <label htmlFor="checkoutEnabled" className="text-gray-300">
                             Ativar checkout integrado com Mercado Pago
+                          </label>
+                        </div>
+
+                        <div className="flex items-center gap-3">
+                          <input
+                            type="checkbox"
+                            id="salesEnabled"
+                            checked={formData.sales.enabled}
+                            onChange={(e) => handleInputChange('sales', 'enabled', e.target.checked)}
+                            className="w-4 h-4 rounded border-gray-600 bg-gray-800 text-green-500"
+                          />
+                          <label htmlFor="salesEnabled" className="text-gray-300">
+                            Vendas Ativas
                           </label>
                         </div>
 

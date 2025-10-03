@@ -41,6 +41,9 @@ export interface SiteConfig {
   checkout: {
     enabled: boolean;
   };
+  sales: {
+    enabled: boolean;
+  };
   riddle: {
     enabled: boolean;
     question: string;
@@ -108,6 +111,9 @@ const defaultConfig: SiteConfig = {
   },
   checkout: {
     enabled: false,
+  },
+  sales: {
+    enabled: true,
   },
   riddle: {
     enabled: false,

@@ -155,12 +155,20 @@ const TicketsSection: React.FC = () => {
               </ul>
 
               {/* Button */}
-              {ticket.available ? (
+              {ticket.available && config.sales.enabled ? (
                 <button
                   onClick={() => handleBuyClick(index === 0 ? 'vip' : 'normal')}
                   className={`block w-full btn-spooky text-center bg-gradient-to-r ${ticket.gradient} hover:shadow-2xl`}
                 >
-                  Comprar Agora
+                  Comprar Ingresso
+                </button>
+              ) : !config.sales.enabled ? (
+                <button
+                  disabled
+                  className="w-full bg-gray-700/50 text-gray-400 font-semibold py-3 px-6 rounded-xl border border-gray-600/30 cursor-not-allowed flex items-center justify-center gap-2"
+                >
+                  <X size={18} />
+                  Vendas Desativadas
                 </button>
               ) : (
                 <button

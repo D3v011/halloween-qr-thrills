@@ -16,6 +16,8 @@ export type Database = {
     Tables: {
       purchases: {
         Row: {
+          checked_in: boolean
+          checked_in_at: string | null
           created_at: string
           email: string
           full_name: string
@@ -29,6 +31,8 @@ export type Database = {
           updated_at: string
         }
         Insert: {
+          checked_in?: boolean
+          checked_in_at?: string | null
           created_at?: string
           email: string
           full_name: string
@@ -42,6 +46,8 @@ export type Database = {
           updated_at?: string
         }
         Update: {
+          checked_in?: boolean
+          checked_in_at?: string | null
           created_at?: string
           email?: string
           full_name?: string

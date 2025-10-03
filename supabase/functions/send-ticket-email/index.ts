@@ -25,8 +25,8 @@ serve(async (req) => {
 
     const resend = new Resend(resendApiKey);
 
-    // Generate QR Code as base64
-    const qrCodeData = `HALLOWEEN2025-${purchaseId}`;
+    // Generate QR Code as base64 - ONLY the purchaseId
+    const qrCodeData = purchaseId; // Simple: just the purchase ID
     const qrCodeBase64 = await QRCode.toDataURL(qrCodeData, {
       width: 400,
       margin: 2,
