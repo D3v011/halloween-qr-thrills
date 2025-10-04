@@ -8,73 +8,70 @@
 
 @layer base {
   :root {
-    /* Halloween Dark Theme */
-    --background: 240 10% 3.9%;
-    --foreground: 30 20% 95%;
+    /* Modern Halloween Dark Theme - Smooth & Elegant */
+    --background: 240 12% 8%;
+    --foreground: 30 15% 96%;
 
-    --card: 240 10% 5.5%;
-    --card-foreground: 30 20% 95%;
+    --card: 240 10% 12%;
+    --card-foreground: 30 15% 96%;
 
-    --popover: 240 10% 5.5%;
-    --popover-foreground: 30 20% 95%;
+    --popover: 240 10% 12%;
+    --popover-foreground: 30 15% 96%;
 
-    --primary: 24 100% 50%;
-    --primary-foreground: 240 10% 3.9%;
+    --primary: 24 95% 53%;
+    --primary-foreground: 240 12% 8%;
 
-    --secondary: 280 100% 30%;
-    --secondary-foreground: 30 20% 95%;
+    --secondary: 270 80% 45%;
+    --secondary-foreground: 30 15% 96%;
 
-    --muted: 240 5% 15%;
-    --muted-foreground: 240 5% 64.9%;
+    --muted: 240 8% 20%;
+    --muted-foreground: 240 5% 65%;
 
-    --accent: 0 100% 45%;
-    --accent-foreground: 30 20% 95%;
+    --accent: 15 85% 55%;
+    --accent-foreground: 30 15% 96%;
 
-    --destructive: 0 84.2% 60.2%;
+    --destructive: 0 80% 58%;
     --destructive-foreground: 210 40% 98%;
 
-    --border: 240 5% 15%;
-    --input: 240 5% 15%;
-    --ring: 24 100% 50%;
+    --border: 240 8% 18%;
+    --input: 240 8% 18%;
+    --ring: 24 95% 53%;
 
     --radius: 1rem;
 
-    /* Halloween-specific colors */
-    --halloween-orange: 24 100% 50%;
-    --halloween-purple: 280 100% 30%;
-    --halloween-red: 0 100% 45%;
-    --halloween-dark: 240 10% 3.9%;
-    --halloween-darker: 240 20% 1%;
+    /* Halloween-specific colors - Softer & More Harmonious */
+    --halloween-orange: 24 95% 53%;
+    --halloween-purple: 270 80% 45%;
+    --halloween-red: 15 85% 55%;
+    --halloween-dark: 240 12% 8%;
+    --halloween-darker: 240 15% 4%;
+    --halloween-accent: 280 75% 40%;
 
-    /* Gradients */
-    --gradient-halloween: linear-gradient(135deg, hsl(var(--halloween-purple)), hsl(var(--halloween-dark)));
-    --gradient-spooky: linear-gradient(45deg, hsl(var(--halloween-red)), hsl(var(--halloween-orange)));
-    --gradient-dark: linear-gradient(180deg, hsl(var(--halloween-darker)), hsl(var(--halloween-dark)));
+    /* Smooth Gradients */
+    --gradient-halloween: linear-gradient(135deg, hsl(270 80% 45% / 0.15), hsl(240 12% 8%));
+    --gradient-spooky: linear-gradient(135deg, hsl(24 95% 53% / 0.9), hsl(15 85% 55% / 0.9));
+    --gradient-dark: linear-gradient(180deg, hsl(240 15% 4%), hsl(240 12% 8%));
+    --gradient-card: linear-gradient(135deg, hsl(240 10% 12% / 0.95), hsl(240 12% 8% / 0.95));
 
-    /* Shadows and glows */
-    --shadow-spooky: 0 10px 30px -10px hsl(var(--halloween-orange) / 0.3);
-    --shadow-dark: 0 25px 50px -12px hsl(240 20% 0% / 0.8);
-    --glow-orange: 0 0 20px hsl(var(--halloween-orange) / 0.5);
-    --glow-purple: 0 0 20px hsl(var(--halloween-purple) / 0.5);
+    /* Elegant Shadows and Glows */
+    --shadow-soft: 0 4px 20px -2px hsl(240 15% 0% / 0.3);
+    --shadow-medium: 0 8px 30px -4px hsl(240 15% 0% / 0.4);
+    --shadow-large: 0 20px 60px -10px hsl(240 15% 0% / 0.5);
+    --glow-orange: 0 0 30px hsl(24 95% 53% / 0.3);
+    --glow-purple: 0 0 30px hsl(270 80% 45% / 0.25);
+    --glow-subtle: 0 2px 15px hsl(24 95% 53% / 0.15);
 
-    /* Animation timing */
-    --transition-spooky: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-    --transition-smooth: all 0.3s ease;
+    /* Smooth Animations */
+    --transition-smooth: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-spring: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
 
     --sidebar-background: 0 0% 98%;
-
     --sidebar-foreground: 240 5.3% 26.1%;
-
     --sidebar-primary: 240 5.9% 10%;
-
     --sidebar-primary-foreground: 0 0% 98%;
-
     --sidebar-accent: 240 4.8% 95.9%;
-
     --sidebar-accent-foreground: 240 5.9% 10%;
-
     --sidebar-border: 220 13% 91%;
-
     --sidebar-ring: 217.2 91.2% 59.8%;
   }
 
@@ -133,77 +130,94 @@
 }
 
 @layer components {
-  /* Halloween Button Variants */
+  /* Modern Halloween Button Variants */
   .btn-spooky {
-    @apply bg-gradient-to-r from-orange-500 to-red-500 text-white font-semibold py-3 px-6 rounded-xl 
-           shadow-[var(--shadow-spooky)] hover:shadow-[var(--glow-orange)] 
-           transform hover:scale-105 transition-all duration-300 
-           border border-orange-400/20;
+    @apply bg-gradient-to-r from-orange-500 to-red-500 text-white font-semibold py-4 px-8 rounded-2xl 
+           shadow-[var(--shadow-medium)] hover:shadow-[var(--glow-orange)] 
+           transform hover:scale-[1.02] hover:-translate-y-0.5 transition-all duration-300 
+           border border-orange-400/10 backdrop-blur-sm;
   }
 
   .btn-ghost {
-    @apply bg-white/10 backdrop-blur-sm text-white font-semibold py-3 px-6 rounded-xl 
-           border border-white/20 hover:bg-white/20 hover:shadow-[var(--glow-purple)]
-           transform hover:scale-105 transition-all duration-300;
+    @apply bg-white/5 backdrop-blur-md text-white font-medium py-4 px-8 rounded-2xl 
+           border border-white/10 hover:bg-white/10 hover:border-white/20 hover:shadow-[var(--glow-subtle)]
+           transform hover:scale-[1.02] transition-all duration-300;
   }
 
   .btn-mystery {
-    @apply bg-gradient-to-r from-purple-600 to-purple-800 text-white font-semibold py-3 px-6 rounded-xl 
-           shadow-[var(--shadow-dark)] hover:shadow-[var(--glow-purple)] 
-           transform hover:scale-105 transition-all duration-300 
-           border border-purple-400/20;
+    @apply bg-gradient-to-r from-purple-600 to-purple-800 text-white font-semibold py-4 px-8 rounded-2xl 
+           shadow-[var(--shadow-medium)] hover:shadow-[var(--glow-purple)] 
+           transform hover:scale-[1.02] hover:-translate-y-0.5 transition-all duration-300 
+           border border-purple-400/10 backdrop-blur-sm;
   }
 
-  /* Halloween Card Styles */
+  /* Modern Card Styles */
   .card-spooky {
-    @apply bg-gradient-to-br from-gray-900/90 to-black/90 backdrop-blur-sm 
-           border border-orange-500/20 rounded-2xl shadow-[var(--shadow-dark)]
-           hover:border-orange-500/40 transition-all duration-300;
+    @apply bg-gradient-to-br from-gray-900/70 to-black/70 backdrop-blur-xl 
+           border border-orange-500/10 rounded-3xl shadow-[var(--shadow-large)]
+           hover:border-orange-500/20 hover:shadow-[var(--glow-subtle)] transition-all duration-500;
   }
 
   .card-mystery {
-    @apply bg-gradient-to-br from-purple-900/30 to-black/90 backdrop-blur-sm 
-           border border-purple-500/20 rounded-2xl shadow-[var(--shadow-dark)]
-           hover:border-purple-500/40 transition-all duration-300;
+    @apply bg-gradient-to-br from-purple-900/20 to-black/70 backdrop-blur-xl 
+           border border-purple-500/10 rounded-3xl shadow-[var(--shadow-large)]
+           hover:border-purple-500/20 hover:shadow-[var(--glow-purple)] transition-all duration-500;
   }
 
-  /* Halloween Input Styles */
+  /* Elegant Input Styles */
   .input-spooky {
-    @apply bg-black/50 border border-orange-500/30 rounded-lg px-4 py-3 
-           text-white placeholder-gray-400 focus:border-orange-500 
-           focus:shadow-[var(--glow-orange)] transition-all duration-300;
+    @apply bg-black/30 backdrop-blur-sm border border-orange-500/20 rounded-2xl px-6 py-4 
+           text-white placeholder-gray-400 focus:border-orange-500/40 
+           focus:shadow-[var(--glow-subtle)] transition-all duration-300;
   }
 
-  /* Spooky Text Effects */
+  /* Modern Text Effects */
   .text-spooky {
-    @apply bg-gradient-to-r from-orange-400 to-red-500 bg-clip-text text-transparent;
+    @apply bg-gradient-to-r from-orange-400 via-red-400 to-orange-500 bg-clip-text text-transparent;
   }
 
   .text-mystery {
-    @apply bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent;
+    @apply bg-gradient-to-r from-purple-400 via-pink-400 to-purple-500 bg-clip-text text-transparent;
   }
 
   .text-ghost {
-    @apply text-white/80 hover:text-white transition-colors duration-300;
+    @apply text-white/70 hover:text-white/90 transition-colors duration-300;
+  }
+
+  /* Smooth Section Styles */
+  .section-container {
+    @apply px-4 sm:px-6 md:px-8 max-w-7xl mx-auto;
+  }
+
+  .section-spacing {
+    @apply py-12 sm:py-16 md:py-20 lg:py-24;
   }
 }
 
 @layer utilities {
-  /* Halloween Animations */
+  /* Smooth Animations */
   .animate-float {
-    animation: float 3s ease-in-out infinite;
+    animation: float 4s ease-in-out infinite;
   }
 
   .animate-pulse-spooky {
-    animation: pulse-spooky 2s ease-in-out infinite;
+    animation: pulse-spooky 3s ease-in-out infinite;
   }
 
   .animate-glow {
-    animation: glow 2s ease-in-out infinite alternate;
+    animation: glow 3s ease-in-out infinite alternate;
   }
 
   .animate-shake {
     animation: shake 0.5s ease-in-out;
+  }
+
+  .animate-fade-in {
+    animation: fadeIn 0.8s ease-out;
+  }
+
+  .animate-slide-up {
+    animation: slideUp 0.6s ease-out;
   }
 
   /* Background gradients */
@@ -218,35 +232,39 @@
   .bg-dark {
     background: var(--gradient-dark);
   }
+
+  .bg-card-gradient {
+    background: var(--gradient-card);
+  }
 }
 
-/* Halloween Keyframes */
+/* Smooth Keyframes */
 @keyframes float {
   0%, 100% {
     transform: translateY(0px);
   }
   50% {
-    transform: translateY(-10px);
+    transform: translateY(-15px);
   }
 }
 
 @keyframes pulse-spooky {
   0%, 100% {
-    opacity: 0.8;
-    filter: drop-shadow(0 0 10px hsl(var(--halloween-orange) / 0.3));
+    opacity: 0.85;
+    filter: drop-shadow(0 0 8px hsl(var(--halloween-orange) / 0.2));
   }
   50% {
     opacity: 1;
-    filter: drop-shadow(0 0 20px hsl(var(--halloween-orange) / 0.6));
+    filter: drop-shadow(0 0 20px hsl(var(--halloween-orange) / 0.4));
   }
 }
 
 @keyframes glow {
   from {
-    filter: drop-shadow(0 0 10px hsl(var(--halloween-purple) / 0.3));
+    filter: drop-shadow(0 0 8px hsl(var(--halloween-purple) / 0.2));
   }
   to {
-    filter: drop-shadow(0 0 20px hsl(var(--halloween-purple) / 0.6));
+    filter: drop-shadow(0 0 20px hsl(var(--halloween-purple) / 0.4));
   }
 }
 
@@ -259,6 +277,28 @@
   }
   75% {
     transform: translateX(2px);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
 }
 a[href*="lovable.dev"], 

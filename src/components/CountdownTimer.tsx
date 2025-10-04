@@ -53,32 +53,32 @@ const CountdownTimer: React.FC<CountdownTimerProps> = ({ targetDate }) => {
   ];
 
   return (
-    <div className="card-mystery p-6 md:p-8">
-      <div className="flex items-center justify-center gap-3 mb-6">
-        <Clock className="text-purple-400" size={28} />
-        <h3 className="text-2xl md:text-3xl font-creepster text-mystery">
+    <div className="bg-gradient-to-br from-purple-900/15 to-black/60 backdrop-blur-xl rounded-3xl shadow-[var(--shadow-large)] border border-purple-500/10 hover:border-purple-500/20 transition-all duration-500 p-6 sm:p-8 md:p-10">
+      <div className="flex items-center justify-center gap-2 md:gap-3 mb-6 md:mb-8">
+        <Clock className="text-purple-400 flex-shrink-0" size={24} />
+        <h3 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-creepster text-mystery text-center">
           Contagem Regressiva
         </h3>
       </div>
       
-      <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+      <div className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4 lg:gap-6">
         {timeUnits.map((unit, index) => (
           <div 
             key={index}
-            className="bg-black/50 rounded-xl p-4 border border-purple-500/30 hover:border-purple-500/50 transition-all duration-300"
+            className="bg-gradient-to-br from-black/40 to-purple-900/20 backdrop-blur-sm rounded-2xl p-4 md:p-5 lg:p-6 border border-purple-500/20 hover:border-purple-500/30 hover:shadow-[var(--glow-purple)] transition-all duration-300 transform hover:scale-[1.02]"
           >
-            <div className="text-3xl md:text-4xl font-bold text-purple-400 mb-1 font-mono">
+            <div className="text-3xl sm:text-4xl md:text-5xl font-bold text-purple-400 mb-1 md:mb-2 font-mono">
               {String(unit.value).padStart(2, '0')}
             </div>
-            <div className="text-xs md:text-sm text-purple-300 uppercase tracking-wider">
+            <div className="text-xs md:text-sm text-purple-300/80 uppercase tracking-wider font-medium">
               {unit.label}
             </div>
           </div>
         ))}
       </div>
       
-      <div className="mt-6 text-center">
-        <p className="text-sm md:text-base text-purple-300/80">
+      <div className="mt-6 md:mt-8 text-center">
+        <p className="text-sm md:text-base lg:text-lg text-purple-300/70 font-light">
           ⚡ Prepare-se para a noite mais assombrada do ano! ⚡
         </p>
       </div>
