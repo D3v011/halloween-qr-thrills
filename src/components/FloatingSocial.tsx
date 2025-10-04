@@ -1,5 +1,6 @@
 import React from 'react';
-import { MessageCircle, Instagram } from 'lucide-react';
+import { Instagram } from 'lucide-react';
+import { FaWhatsapp } from 'react-icons/fa'; // Ícone oficial do WhatsApp
 import { useConfig } from '@/contexts/ConfigContext';
 
 const FloatingSocial: React.FC = () => {
@@ -9,15 +10,15 @@ const FloatingSocial: React.FC = () => {
     {
       name: 'WhatsApp',
       url: config.social.whatsapp,
-      icon: MessageCircle,
-      bgColor: 'bg-red-700 hover:bg-black text-white border-2 border-black hover:border-red-700',
+      icon: FaWhatsapp,
+      bgColor: 'bg-orange-500 hover:bg-orange-600 text-white border-2 border-orange-700 hover:border-orange-800',
       label: 'Grupo da Festa',
     },
     {
       name: 'Instagram',
       url: config.social.instagram,
       icon: Instagram,
-      bgColor: 'bg-black hover:bg-red-700 text-white border-2 border-red-700 hover:border-black',
+      bgColor: 'bg-orange-500 hover:bg-orange-600 text-white border-2 border-orange-700 hover:border-orange-800',
       label: 'Siga no Instagram',
     },
   ];
@@ -33,7 +34,7 @@ const FloatingSocial: React.FC = () => {
             href={social.url}
             target="_blank"
             rel="noopener noreferrer"
-            className={`${social.bgColor} p-4 rounded-full shadow-2xl transition-all duration-300 transform hover:scale-110 animate-pulse-spooky group`}
+            className={`${social.bgColor} p-4 rounded-full shadow-2xl transition-all duration-300 transform hover:scale-110 animate-pulse-spooky group relative`}
             aria-label={social.label}
             title={social.label}
           >
