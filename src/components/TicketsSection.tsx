@@ -97,7 +97,7 @@ const TicketsSection: React.FC = () => {
     <div>
       <div className="text-center mb-8 md:mb-12">
         <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-creepster text-spooky mb-3 md:mb-4 animate-float px-4">
-          🎟️ Garanta Seu Ingresso
+          Garanta Seu Ingresso
         </h2>
         <p className="text-base sm:text-lg md:text-xl text-white/70 max-w-2xl mx-auto px-4">
           Escolha sua experiência na festa mais assombrada de Barueri
