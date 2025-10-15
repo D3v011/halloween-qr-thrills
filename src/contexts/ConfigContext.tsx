@@ -99,14 +99,14 @@ const defaultConfig: SiteConfig = {
     normal: {
       title: "🎟️ Ingresso Normal",
       description: "Acesso completo à festa mais assombrada",
-      price: "R$ 19,90",
+      price: "R$ 14,99",
       features: [
         "Entrada para o Evento",
         "Acesso a Todas as Atrações",
         "Entrada até 21h"
       ],
-      available: false,
-      purchaseLink: "",
+      available: true,
+      purchaseLink: "https://preview--halloween-party.lovable.app",
     },
   },
   checkout: {
