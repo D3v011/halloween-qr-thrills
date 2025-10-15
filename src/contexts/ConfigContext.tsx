@@ -106,7 +106,7 @@ const defaultConfig: SiteConfig = {
         "Entrada até 21h"
       ],
       available: true,
-      purchaseLink: "https://preview--halloween-party.lovable.app",
+      purchaseLink: "https://mpago.la/26k4msn",
     },
   },
   checkout: {
